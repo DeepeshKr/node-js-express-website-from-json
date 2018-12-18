@@ -1,0 +1,37 @@
+extends ../layout/index
+
+block content
+  #feedback.container
+    .row
+      .col-sm-4
+        h1.feedback-form-title Send us feedback
+        form.feedback-form
+          .form-group
+            label(for='feedback-form-name') Name
+            input#feedback-form-name.form-control(type='text', placeholder='Enter your name')
+          .form-group
+            label(for='feedback-form-title') Title
+            input#feedback-form-title.form-control(type='text', placeholder='Title of your feedback')
+          .form-group
+            label(for='feedback-form-message') Message
+            textarea#feedback-form-message.form-control(type='text', placeholder='Enter your message, then hit the submit', rows='6')
+          button.btn.btn-default.pull-right(type='submit') Submit
+      // primary
+      aside.col-sm-8
+        .maincontent.feedback
+          h2.article-title Recent Feedback
+          if !feedbacklist || !feedbacklist.length
+            | No feedback so far! Be the first!
+          else  
+            .feedback-messages
+              each item in feedbacklist
+                .feedback-item.item-list.media-list
+                  .feedback-item.media
+                    .feedback-info.media-body
+                      .feedback-head
+                        .feedback-title=item.title
+                          | &nbsp;
+                          small.feedback-name.label.label-info=item.name
+                      .feedback-message=item.message
+              
+                        

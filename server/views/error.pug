@@ -1,0 +1,18 @@
+doctype html
+html
+    head
+      link#bootstrap-css(href='//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css', rel='stylesheet')
+      link(rel='stylesheet', href='css/error.css', type='text/css')
+      script(src='//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js')
+      script(src='//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+      // ---- Include the above in your HEAD tag --------
+    body
+      .page-wrap.d-flex.flex-row.align-items-center
+        .container
+          .row.justify-content-center
+            .col-md-12.text-center
+              span.display-1.d-block=status
+              .mb-4.lead=message
+                .col-md-8.text-left
+                if (error)
+                  pre=error.stack
