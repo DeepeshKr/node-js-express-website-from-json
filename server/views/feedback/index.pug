@@ -5,16 +5,22 @@ block content
     .row
       .col-sm-4
         h1.feedback-form-title Send us feedback
-        form.feedback-form
+        if error
+          .alert.alert-danger
+            | There was an error handling your requests, all fields required.
+        else if success
+          .alert.alert-success
+            | Thank you for your feedback!
+        form.feedback-form(action='/feedback', method='POST')
           .form-group
             label(for='feedback-form-name') Name
-            input#feedback-form-name.form-control(type='text', placeholder='Enter your name')
+            input#feedback-form-name.form-control(type='text', placeholder='Enter your name', name='fbname', value=fbName)
           .form-group
             label(for='feedback-form-title') Title
-            input#feedback-form-title.form-control(type='text', placeholder='Title of your feedback')
+            input#feedback-form-title.form-control(type='text', placeholder='Title of your feedback', name='fbtitle', value=fbTitle)
           .form-group
             label(for='feedback-form-message') Message
-            textarea#feedback-form-message.form-control(type='text', placeholder='Enter your message, then hit the submit', rows='6')
+            textarea#feedback-form-message.form-control(type='text', placeholder='Enter your message, then hit the submit', rows='6', name='fbmessage')=fbMessage
           button.btn.btn-default.pull-right(type='submit') Submit
       // primary
       aside.col-sm-8

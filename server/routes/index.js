@@ -33,7 +33,7 @@ module.exports = (param) => {
     // router.use('/speakers', speakersRoute({
     //     speakerService
     // }));
-    console.log(`Param from index ${JSON.stringify(param)}`)
+    //console.log(`Param from index ${JSON.stringify(param)}`)
     router.use('/speakers', speakersRoute(param));
     router.use('/feedback', feedbackRoute(param));
     

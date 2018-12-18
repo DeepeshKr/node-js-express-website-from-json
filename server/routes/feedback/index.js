@@ -8,14 +8,12 @@ module.exports = (param) => {
 
     router.get('/', async (req, res, next) => {
         try {
-            const feedbacklist = await feedbackService.getList();
-           
-            console.log(`Param from feedback ${JSON.stringify(feedbacklist)}`)
-           
+            const feedbacklist = await feedbackService.getList(); 
             
             return res.render('feedback', {
                 page: 'Feedback',
                 feedbacklist,
+                success: req.query.success,
                 
             });
         } catch(err) {
@@ -23,8 +21,31 @@ module.exports = (param) => {
         }
     });
 
-    router.post('/', (req, res, next) => {
-        return res.send('Form sent');
+    router.post('/', async (req, res, next) => {
+        try {
+            const feedbacklist = await feedbackService.getList(); 
+        console.log(req.body);
+        const fbName = req.body.fbname.trim();
+        const fbTitle = req.body.fbtitle.trim();
+        const fbMessage = req.body.fbmessage.trim();
+
+        if (!fbName || !fbTitle || !fbMessage) {
+            return res.render('feedback', {
+                page: 'Feedback',
+                error: true,
+                fbName,
+                fbMessage,
+                fbTitle,
+                feedbacklist,
+            });
+        }
+        console.log(`bName fbTitle fbMessage`)
+        //await feedbackService.addEntry(fbName, fbTitle, fbMessage);
+        return res.redirect('/feedback?success=true');
+        }
+        catch(err) {
+            return err;
+        }
     });
 
     return router;
